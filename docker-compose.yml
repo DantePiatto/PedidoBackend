@@ -1,0 +1,10 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:alpine3.14
+  serilogseq:
+    image: datalust/seq:2023.4
+    
