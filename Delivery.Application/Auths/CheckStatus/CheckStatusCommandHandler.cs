@@ -7,7 +7,7 @@ using Delivery.Application.Auths.Login;
 using Delivery.Domain.Abstractions;
 using Delivery.Domain.Usuarios;
 
-namespace MsAcceso.Application.Root.Users.LoginUser;
+namespace Delivery.Application.Root.Users.LoginUser;
 
 internal sealed class CheckStatusCommandHandler : IQueryHandler<CheckStatusQuery, LoginUserResponse?>
 {
