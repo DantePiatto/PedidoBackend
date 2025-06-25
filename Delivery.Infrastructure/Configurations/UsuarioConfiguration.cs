@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Delivery.Domain.Usuarios;
+using Delivery.Domain.Shared;
 
 namespace Delivery.Infrastructure.Configurations;
 
@@ -26,10 +27,10 @@ internal sealed class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .HasMaxLength(20);
 
         builder.Property(usuario => usuario.Celular)
-            .HasMaxLength(20);            
-        
+            .HasMaxLength(20);
+
         builder.Property(empleado => empleado.Sexo)
-            .IsRequired()   
+            .IsRequired()
             .HasMaxLength(20);
 
         builder.Property(usuario => usuario.IsDefaultPassword);
@@ -41,6 +42,11 @@ internal sealed class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.HasIndex(usuario => usuario.Correo).IsUnique();
 
         builder.HasIndex(usuario => usuario.Dni).IsUnique();
+        
+        	builder.Property(parametro => parametro.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
+
 
         // builder
         //            .HasOne(user => user.Rol)

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Delivery.Domain.Usuarios;
 using Delivery.Infrastructure.Repositories;
 using Delivery.Domain.Abstractions;
+using Delivery.Application.Paginations;
+using Delivery.Domain.Parametros;
 
 namespace Delivery.Infrastructure;
 
@@ -41,6 +43,8 @@ public static class DependencyInjection
 
             
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+        services.AddScoped<IPaginationParametrosRepository, ParametroRepository>();
+        services.AddScoped<IParametroRepository, ParametroRepository>();
         // services.AddScoped<IPaginationRutinaRepository, RutinaRepository>();
         // services.AddScoped<IClienteRutinaRepository, ClienteRutinaRepository>();
 
