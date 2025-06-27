@@ -49,7 +49,7 @@ public static class DependencyInjection
         // services.AddScoped<IClienteRutinaRepository, ClienteRutinaRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
-
+        
         return services;
     }
 
