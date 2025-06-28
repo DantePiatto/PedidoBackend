@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Delivery.Api.Utils;
 using Delivery.Application.Auths.CheckStatus;
 using Delivery.Application.Auths.Login;
+using Delivery.Application.Auths.LoginOAuth2;
 
 namespace Delivery.Api.Controllers.Auth;
 
@@ -66,6 +67,20 @@ public class AuthController : Controller
         );
 
         var result = await _sender.Send(command, cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result);
+        }
+
+        return Ok(result);
+    }
+
+
+    [HttpPost("oauth2")]
+    public async Task<IActionResult> LoginOAuth2([FromBody] LoginOAuth2Command command)
+    {
+        var result = await _sender.Send(command);
 
         if (result.IsFailure)
         {
