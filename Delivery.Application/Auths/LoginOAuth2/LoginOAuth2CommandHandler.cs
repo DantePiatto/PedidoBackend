@@ -21,10 +21,12 @@ public class LoginOAuth2CommandHandler : ICommandHandler<LoginOAuth2Command, Log
     public async  Task<Result<LoginOAuth2Response>>  Handle(LoginOAuth2Command request, CancellationToken cancellationToken)
     {
         var oauthUser = await _validator.ValidateAsync(request.Provider, request.Token);
+        
         if (oauthUser == null)
-        {
             return Result.Failure<LoginOAuth2Response>(UsuarioErrors.CredencialesInvalidas)!;
-        }
+
+        if (oauthUser.Email == null || oauthUser.Email!.Length == 0)
+            return Result.Failure<LoginOAuth2Response>(UsuarioErrors.NotFoundEmail)!;
 
         var usuario = await _usuarioRepository.GetByEmailAsync(oauthUser.Email, cancellationToken);
 
@@ -32,14 +34,13 @@ public class LoginOAuth2CommandHandler : ICommandHandler<LoginOAuth2Command, Log
 
         if (usuario == null)
         {
-
             isNewUser = true;
-            return new LoginOAuth2Response(string.Empty , isNewUser)!;
+            return new LoginOAuth2Response(string.Empty, isNewUser)!;
         }
 
         var jwt = await _jwtProvider.Generate(usuario!);
 
-        return new LoginOAuth2Response(jwt , isNewUser)!;
+        return new LoginOAuth2Response(jwt, isNewUser)!;
     }
 
     // Task<Result<LoginOAuth2Response>> IRequestHandler<LoginOAuth2Command, Result<LoginOAuth2Response>>.Handle(LoginOAuth2Command request, CancellationToken cancellationToken)

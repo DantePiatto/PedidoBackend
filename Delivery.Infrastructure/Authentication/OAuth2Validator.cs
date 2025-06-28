@@ -55,7 +55,7 @@ public class OAuth2Validator : IOAuth2Validator
 
     private async Task<OAuthUserInfo?> ValidateFacebookToken(string token)
     {
-        var url = $"https://graph.facebook.com/me?fields=email&access_token={token}";
+        var url = $"https://graph.facebook.com/me?fields=email,first_name,middle_name,last_name,picture&access_token={token}";
         var response = await _http.GetAsync(url);
 
         if (!response.IsSuccessStatusCode) return null;
@@ -63,12 +63,38 @@ public class OAuth2Validator : IOAuth2Validator
         var json = await response.Content.ReadAsStringAsync();
         var data = JsonSerializer.Deserialize<JsonElement>(json);
 
+        var firstName = "";
+        var middleName = "";
+        string pictureUrl = "";
+
+        try
+        {
+            firstName = data.TryGetProperty("first_name", out var firstNameProp) ? firstNameProp.GetString() ?? "" : "";
+            middleName = data.TryGetProperty("middle_name", out var middleNameProp) && !string.IsNullOrWhiteSpace(middleNameProp.GetString())
+                        ? middleNameProp.GetString() : "" ?? "";
+            pictureUrl = data.TryGetProperty("picture", out var pictureProp) &&
+                        pictureProp.TryGetProperty("data", out var pictureDataProp) &&
+                        pictureDataProp.TryGetProperty("url", out var urlProp)
+                            ? urlProp.GetString() ?? "" : "";
+        }
+        catch (System.Exception)
+        {            
+            throw;
+        }
+
         return new OAuthUserInfo
         {
-            // Id = data.GetProperty("id").GetString() ?? "",
-            // Name = data.GetProperty("name").GetString() ?? "",
-            // Email = data.TryGetProperty("email", out var emailProp) ? emailProp.GetString() ?? "" : ""
+            Email = data.TryGetProperty("email", out var emailProp) ? emailProp.GetString() ?? "" : "",
+            Nombre = !string.IsNullOrWhiteSpace(middleName) ? firstName + " " + middleName : firstName,
+            Apellidos = data.TryGetProperty("last_name", out var lastNameProp) ? lastNameProp.GetString() ?? "" : "",
+            PictureUrl = pictureUrl
         };
+/*
+    public string Email { get; set; } = string.Empty;
+    public string Nombre { get; set; } = string.Empty;
+    public string Apellidos { get; set; } = string.Empty;
+    public string PictureUrl { get; set; } = string.Empty;
+*/        
     }
 
     private async Task<OAuthUserInfo?> ValidateGoogleToken(string token)
