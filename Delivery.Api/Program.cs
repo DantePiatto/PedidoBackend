@@ -24,6 +24,7 @@ builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 
 builder.Services.AddTransient<IJwtProvider, JwtProvider>();
+builder.Services.AddHttpClient<IOAuth2Validator, OAuth2Validator>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -39,6 +40,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]!)) // 👈 Clave secreta
         };
     });
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // o tu dominio de Angular
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials(); // Solo si usas cookies o auth headers
+        });
+});
 
 builder.Services.AddAuthorization();
 
@@ -91,18 +105,20 @@ builder.Services.AddAndMigrateTenantDatabases(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseCors("AllowFrontend");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(options => {
+    app.UseSwaggerUI(options =>
+    {
         var descriptions = app.DescribeApiVersions();
 
         foreach (var description in descriptions)
         {
             var url = $"/swagger/{description.GroupName}/swagger.json";
             var name = description.GroupName.ToUpperInvariant();
-            options.SwaggerEndpoint(url, name); 
+            options.SwaggerEndpoint(url, name);
         }
 
     });
