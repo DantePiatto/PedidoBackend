@@ -45,10 +45,16 @@ internal sealed class ParametroConfiguration : IEntityTypeConfiguration<Parametr
 
 
 		builder.HasData(
-			Parametro.Create(new ParametroId(1), "PROVEEDOR OAUTH2", "oauth2", null, null, 0, null),
+			Parametro.Create(new ParametroId(1), "PROVEEDOR OAUTH2", null, null, null, 0, null),
 			Parametro.Create(new ParametroId(2), "google", null, null, new ParametroId(1), 1, "1"),
 			Parametro.Create(new ParametroId(3), "facebook", null, null, new ParametroId(1), 1, "2"),
-			Parametro.Create(new ParametroId(4), "instagram", null, null, new ParametroId(1), 1, "3")
+			Parametro.Create(new ParametroId(4), "instagram", null, null, new ParametroId(1), 1, "3"),
+			Parametro.Create(new ParametroId(5), "Estados Pedido", null, null, null, 0, null),
+			Parametro.Create(new ParametroId(6), "Recibido", null, null, new ParametroId(5), 1, "1"),
+			Parametro.Create(new ParametroId(7), "Preparando", null, null, new ParametroId(5), 1, "2"),
+			Parametro.Create(new ParametroId(8), "En camino", null, null, new ParametroId(5), 1, "3"),
+			Parametro.Create(new ParametroId(9), "Entregado", null, null, new ParametroId(5), 1, "4")
+
 		);
 
 	}

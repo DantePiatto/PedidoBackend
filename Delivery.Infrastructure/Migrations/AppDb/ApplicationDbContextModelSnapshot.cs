@@ -64,7 +64,6 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         new
                         {
                             Id = 1,
-                            Abreviatura = "oauth2",
                             Activo = true,
                             Nivel = 0,
                             Nombre = "PROVEEDOR OAUTH2"
@@ -95,6 +94,49 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                             Nivel = 1,
                             Nombre = "instagram",
                             Valor = "3"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Activo = true,
+                            Nivel = 0,
+                            Nombre = "Estados Pedido"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "Recibido",
+                            Valor = "1"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "Preparando",
+                            Valor = "2"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "En camino",
+                            Valor = "3"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "Entregado",
+                            Valor = "4"
                         });
                 });
 

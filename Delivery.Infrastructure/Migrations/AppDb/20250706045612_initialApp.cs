@@ -61,10 +61,15 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                 columns: new[] { "Id", "Abreviatura", "Activo", "Dependencia", "Descripcion", "Nivel", "Nombre", "Valor" },
                 values: new object[,]
                 {
-                    { 1, "oauth2", true, null, null, 0, "PROVEEDOR OAUTH2", null },
+                    { 1, null, true, null, null, 0, "PROVEEDOR OAUTH2", null },
+                    { 5, null, true, null, null, 0, "Estados Pedido", null },
                     { 2, null, true, 1, null, 1, "google", "1" },
                     { 3, null, true, 1, null, 1, "facebook", "2" },
-                    { 4, null, true, 1, null, 1, "instagram", "3" }
+                    { 4, null, true, 1, null, 1, "instagram", "3" },
+                    { 6, null, true, 5, null, 1, "Recibido", "1" },
+                    { 7, null, true, 5, null, 1, "Preparando", "2" },
+                    { 8, null, true, 5, null, 1, "En camino", "3" },
+                    { 9, null, true, 5, null, 1, "Entregado", "4" }
                 });
 
             migrationBuilder.CreateIndex(
