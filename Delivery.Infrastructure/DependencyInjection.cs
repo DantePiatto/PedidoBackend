@@ -8,7 +8,6 @@ using Delivery.Infrastructure.Repositories;
 using Delivery.Domain.Abstractions;
 using Delivery.Application.Paginations;
 using Delivery.Domain.Parametros;
-using Delivery.Domain.Categorias;
 using Delivery.Domain.DetallePedidos;
 using Delivery.Domain.Direcciones;
 using Delivery.Domain.EstadoPedidos;
@@ -63,7 +62,6 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
-        services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<IDetallePedidoRepository, DetallepedidoRepository>();
         services.AddScoped<IDireccionRepository, DireccionRepository>();
         services.AddScoped<IEstadoPedidoRepository, EstadoPedidoRepository>();

@@ -2,8 +2,8 @@
 
 using System.Diagnostics;
 using Delivery.Domain.Abstractions;
-using Delivery.Domain.Categorias;
 using Delivery.Domain.DetallePedidos;
+using Delivery.Domain.Parametros;
 using Delivery.Domain.Restaurantes;
 
 namespace Delivery.Domain.Productos;
@@ -19,7 +19,7 @@ public sealed class Producto : Entity<ProductoId>
 
         ProductoId id,
         RestauranteId restauranteId,
-        CategoriaId categoriaId,
+        ParametroId categoriaId,
         string nombre,
         string descripcion,
         double precio,
@@ -38,7 +38,7 @@ public sealed class Producto : Entity<ProductoId>
     }
 
     public RestauranteId? RestauranteId { get; set; }
-    public CategoriaId? CategoriaId { get; set; }
+    public ParametroId? CategoriaId { get; set; }
     public string? Nombre { get; set; }
 
     public string? Descripcion { get; set; }
@@ -50,7 +50,7 @@ public sealed class Producto : Entity<ProductoId>
     //public bool Activos { get; set; }
 
 
-    public Categoria? Categoria  { get; set; }
+    public Parametro? Categoria  { get; set; }
 
     public Restaurante? Restaurante { get; set; }
     
@@ -61,7 +61,7 @@ public sealed class Producto : Entity<ProductoId>
 
         ProductoId id,
         RestauranteId restauranteId,
-        CategoriaId categoriaId,
+        ParametroId categoriaId,
         string nombre,
         string descripcion,
         double precio,
@@ -79,7 +79,7 @@ public sealed class Producto : Entity<ProductoId>
 
 
         RestauranteId restauranteId,
-        CategoriaId categoriaId,
+        ParametroId categoriaId,
         string nombre,
         string descripcion,
         double precio,

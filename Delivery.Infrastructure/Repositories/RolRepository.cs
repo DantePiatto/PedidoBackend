@@ -1,6 +1,5 @@
 
 
-using Delivery.Domain.Categorias;
 using Delivery.Domain.Roles;
 
 

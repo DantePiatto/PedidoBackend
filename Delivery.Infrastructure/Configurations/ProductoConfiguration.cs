@@ -22,9 +22,9 @@ internal sealed class ProductoConfiguration : IEntityTypeConfiguration<Producto>
         builder.Property(producto => producto.Id)
         .HasConversion(productoId => productoId!.Value, value => new ProductoId(value));
 
-        builder.HasOne(producto => producto.Categoria)
-        .WithMany(categoria => categoria.Productos)
-        .HasForeignKey(producto => producto.CategoriaId);
+        builder.HasOne(pedido => pedido.Categoria)
+        .WithMany()
+        .HasForeignKey(pedido => pedido.CategoriaId);
 
         builder.HasOne(producto => producto.Restaurante)
         .WithMany(restaurante => restaurante.Producto)
