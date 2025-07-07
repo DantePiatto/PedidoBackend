@@ -45,7 +45,7 @@ internal sealed class ParametroConfiguration : IEntityTypeConfiguration<Parametr
 
 
 		builder.HasData(
-			Parametro.Create(new ParametroId(1), "PROVEEDOR OAUTH2", "oauth2", null, null, 0, null),
+			Parametro.Create(new ParametroId(1), "PROVEEDOR OAUTH2", null, null, null, 0, null),
 			Parametro.Create(new ParametroId(2), "google", null, null, new ParametroId(1), 1, "1"),
 			Parametro.Create(new ParametroId(3), "facebook", null, null, new ParametroId(1), 1, "2"),
 			Parametro.Create(new ParametroId(4), "instagram", null, null, new ParametroId(1), 1, "3"),

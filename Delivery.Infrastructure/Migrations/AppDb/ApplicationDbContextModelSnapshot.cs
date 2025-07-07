@@ -243,7 +243,6 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         new
                         {
                             Id = 1,
-                            Abreviatura = "oauth2",
                             Activo = true,
                             Nivel = 0,
                             Nombre = "PROVEEDOR OAUTH2"
@@ -277,6 +276,7 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = 10,
                             Activo = true,
                             Nivel = 0,
@@ -289,19 +289,42 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                             Dependencia = 10,
                             Nivel = 1,
                             Nombre = "efectivo",
+=======
+                            Id = 5,
+                            Activo = true,
+                            Nivel = 0,
+                            Nombre = "Estados Pedido"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "Recibido",
+>>>>>>> master
                             Valor = "1"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = 12,
                             Activo = true,
                             Dependencia = 10,
                             Nivel = 1,
                             Nombre = "tarjeta",
+=======
+                            Id = 7,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "Preparando",
+>>>>>>> master
                             Valor = "2"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = 20,
                             Activo = true,
                             Nivel = 0,
@@ -332,10 +355,18 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                             Dependencia = 20,
                             Nivel = 1,
                             Nombre = "en camino",
+=======
+                            Id = 8,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "En camino",
+>>>>>>> master
                             Valor = "3"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = 24,
                             Activo = true,
                             Dependencia = 20,
@@ -435,6 +466,14 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                             Nivel = 1,
                             Nombre = "repartidor",
                             Valor = "2"
+=======
+                            Id = 9,
+                            Activo = true,
+                            Dependencia = 5,
+                            Nivel = 1,
+                            Nombre = "Entregado",
+                            Valor = "4"
+>>>>>>> master
                         });
                 });
 
