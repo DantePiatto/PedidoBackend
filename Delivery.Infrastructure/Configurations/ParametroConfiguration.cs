@@ -73,7 +73,20 @@ internal sealed class ParametroConfiguration : IEntityTypeConfiguration<Parametr
 
 			Parametro.Create(new ParametroId(50),"TIPO",null,null,null,0,null),
 			Parametro.Create(new ParametroId(51),"restaurante",null,null,new ParametroId(50),1,"1"),
-			Parametro.Create(new ParametroId(52),"repartidor",null,null,new ParametroId(50),1,"2")
+			Parametro.Create(new ParametroId(52),"repartidor",null,null,new ParametroId(50),1,"2"),
+
+
+			Parametro.Create(new ParametroId(60),"Categorias",null,null,null,0,null),
+			Parametro.Create(new ParametroId(61), "Comida rápida", null, null, new ParametroId(60), 1, "1"),
+			Parametro.Create(new ParametroId(62), "Desayunos", null, null, new ParametroId(60), 1, "2"),
+			Parametro.Create(new ParametroId(63), "Almuerzos", null, null, new ParametroId(60), 1, "3"),
+			Parametro.Create(new ParametroId(64), "Cenas", null, null, new ParametroId(60), 1, "4"),
+			Parametro.Create(new ParametroId(65), "Postres", null, null, new ParametroId(60), 1, "5"),
+			Parametro.Create(new ParametroId(66), "Bebidas", null, null, new ParametroId(60), 1, "6"),
+			Parametro.Create(new ParametroId(67), "Saludable", null, null, new ParametroId(60), 1, "7"),
+			Parametro.Create(new ParametroId(68), "Vegetariana", null, null, new ParametroId(60), 1, "8"),
+			Parametro.Create(new ParametroId(69), "Japonesa", null, null, new ParametroId(60), 1, "9"),
+			Parametro.Create(new ParametroId(70), "Italiana", null, null, new ParametroId(60), 1, "10")
 
 
 
