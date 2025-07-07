@@ -1,6 +1,11 @@
 
 
 using Delivery.Domain.Abstractions;
+using Delivery.Domain.Direcciones;
+using Delivery.Domain.Opiniones;
+using Delivery.Domain.Pedidos;
+using Delivery.Domain.Repartidores;
+using Delivery.Domain.UsuarioRoles;
 
 namespace Delivery.Domain.Usuarios;
 
@@ -41,6 +46,16 @@ public sealed class Usuario : Entity<UsuarioId>
     public string? Celular {get; set;}    
     public string? Sexo { get; private set; }
     public bool IsDefaultPassword { get; set; }
+    
+    public List<Direccion>? Direccion { get; set; }
+
+    public List<Pedido>?Pedido { get; set; }
+
+     public Repartidor?Repartidor { get; set; }
+
+     public List<Opinion>?Opinion { get; set;}
+     public List<UsuarioRol>?usuarioRols { get; set;}
+    
     // public RolId? RolId { get; set; }
     // public Rol? Rol { get; set; }
     // public Cliente? Cliente { get; set; }
@@ -56,7 +71,7 @@ public sealed class Usuario : Entity<UsuarioId>
         string? dni,
         string? celular,
         string sexo
-        // RolId rolId
+    // RolId rolId
     )
     {
         var usuario = new Usuario(id, correo, password, isDefaultPassword, nombres, apellidos, dni, celular, sexo);
