@@ -1,4 +1,5 @@
 
+using Delivery.Domain.Shared;
 using Delivery.Domain.UsuarioRoles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -26,8 +27,11 @@ internal sealed class UsuarioRolConfoguration : IEntityTypeConfiguration<Usuario
         .HasForeignKey(ro => ro.UsuarioId);
 
         builder.HasOne(ro => ro.Rol)
-        .WithMany(r=>r.UsuarioRols)
+        .WithMany(r => r.UsuarioRols)
         .HasForeignKey(ro => ro.RolId);
         
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
     }
 }

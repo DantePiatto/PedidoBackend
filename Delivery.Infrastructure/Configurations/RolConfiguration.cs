@@ -2,6 +2,7 @@
 
 using Delivery.Domain.Categorias;
 using Delivery.Domain.Roles;
+using Delivery.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -26,7 +27,9 @@ internal sealed class RolConfiguration : IEntityTypeConfiguration<Rol>
 
         builder.Property(r => r.Nombre).IsRequired();
 
-
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
         
     }
 }

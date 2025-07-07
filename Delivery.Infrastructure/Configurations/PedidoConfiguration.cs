@@ -43,6 +43,9 @@ internal sealed class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
 
         builder.Property(pedido => pedido.FechaPedido).IsRequired();
    
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
         
     }
 }

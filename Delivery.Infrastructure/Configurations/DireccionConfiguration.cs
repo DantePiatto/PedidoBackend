@@ -2,6 +2,7 @@
 
 using Delivery.Domain.Categorias;
 using Delivery.Domain.Direcciones;
+using Delivery.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -26,13 +27,17 @@ internal sealed class DireccionConfiguration : IEntityTypeConfiguration<Direccio
 
         builder.HasOne(direc => direc.Usuario)
         .WithMany(user => user.Direccion)
-        .HasForeignKey(direc => direc.UsuarioId); 
+        .HasForeignKey(direc => direc.UsuarioId);
 
         builder.Property(direc => direc.Direc).IsRequired();
         builder.Property(direc => direc.Referencia).IsRequired();
         builder.Property(direc => direc.Latitud).IsRequired();
         builder.Property(direc => direc.Altitud).IsRequired();
         builder.Property(direc => direc.Predeterminado).IsRequired();
+        
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
         
     }
 }

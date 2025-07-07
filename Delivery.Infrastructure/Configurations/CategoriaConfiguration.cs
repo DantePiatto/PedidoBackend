@@ -1,6 +1,7 @@
 
 
 using Delivery.Domain.Categorias;
+using Delivery.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -26,6 +27,10 @@ internal sealed class CategoriaConfiguration : IEntityTypeConfiguration<Categori
         builder.Property(categoria => categoria.Nombre).IsRequired();
 
 
-        
+        builder.Property(re => re.Activo)
+            .IsRequired()
+            .HasConversion(estado => estado!.Value, value => new Activo(value));
+
+
     }
 }

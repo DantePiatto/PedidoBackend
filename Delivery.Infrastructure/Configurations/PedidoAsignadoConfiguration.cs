@@ -2,6 +2,7 @@
 
 
 using Delivery.Domain.PedidoAsignados;
+using Delivery.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -31,6 +32,10 @@ internal sealed class PedidoAsignadoConfiguration : IEntityTypeConfiguration<Ped
         .HasForeignKey(pa => pa.RepartidorId);
 
         builder.Property(pa => pa.FechaAsignacion).IsRequired();
+
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
 
     }
 }

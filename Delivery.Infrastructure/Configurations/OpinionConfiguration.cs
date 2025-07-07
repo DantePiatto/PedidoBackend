@@ -2,6 +2,7 @@
 
 using Delivery.Domain.Abstractions;
 using Delivery.Domain.Opiniones;
+using Delivery.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -30,7 +31,14 @@ internal sealed class OpinionConfiguration : IEntityTypeConfiguration<Opinion>
         builder.HasOne(o => o.Usuario)
         .WithMany(u => u.Opinion)
         .HasForeignKey(o => o.UsuarioId);
+
+        builder.HasOne(dp => dp.Tipo)
+       .WithMany()
+       .HasForeignKey(dp => dp.TipoId);
         
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
 
 
 

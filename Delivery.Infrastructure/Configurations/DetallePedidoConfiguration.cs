@@ -36,6 +36,10 @@ internal sealed class DetallePedidoConfiguration : IEntityTypeConfiguration<Deta
         builder.Property(dp => dp.Cantidad).IsRequired();
 
         builder.Property(dp => dp.SubTotal).IsRequired();
+
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
    
         
     }

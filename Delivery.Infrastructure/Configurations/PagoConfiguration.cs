@@ -1,6 +1,7 @@
 
 
 using Delivery.Domain.Pagos;
+using Delivery.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,15 +25,22 @@ internal sealed class PagoConfiguration : IEntityTypeConfiguration<Pago>
 
         builder.HasOne(pa => pa.Pedido)
         .WithOne(pedido => pedido.Pago)
-        .HasForeignKey<Pago>(pa=>pa.PedidoId);
+        .HasForeignKey<Pago>(pa => pa.PedidoId);
 
         builder.HasOne(pa => pa.MetodoPago)
         .WithMany()
         .HasForeignKey(pa => pa.MetodoPagoId);
 
+        builder.HasOne(pa => pa.EstadoPago)
+        .WithMany()
+        .HasForeignKey(pa => pa.EstadoPagoId);
+
         builder.Property(pa => pa.FechaPago).IsRequired();
 
         
+         builder.Property(re => re.Activo)
+		.IsRequired()
+		.HasConversion(estado => estado!.Value, value => new Activo(value));
    
         
     }
