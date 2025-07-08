@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Delivery.Domain.Abstractions;
 using Delivery.Domain.DetallePedidos;
 using Delivery.Domain.Parametros;
+using Delivery.Domain.ProductoCategorias;
 using Delivery.Domain.Restaurantes;
 
 namespace Delivery.Domain.Productos;
@@ -23,7 +24,7 @@ public sealed class Producto : Entity<ProductoId>
         string nombre,
         string descripcion,
         double precio,
-        string imagen_url
+        string imagenUrl
         //bool activo
     ) : base(id)
     {
@@ -32,7 +33,7 @@ public sealed class Producto : Entity<ProductoId>
         Nombre = nombre;
         Descripcion = descripcion;
         Precio = precio;
-        Imagen_Url = imagen_url;
+        ImagenUrl = imagenUrl;
         //Activos = activo;
 
     }
@@ -45,7 +46,7 @@ public sealed class Producto : Entity<ProductoId>
 
     public double? Precio { get; set; }
 
-    public string? Imagen_Url { get; set; }
+    public string? ImagenUrl { get; set; }
 
     //public bool Activos { get; set; }
 
@@ -53,8 +54,12 @@ public sealed class Producto : Entity<ProductoId>
     public Parametro? Categoria  { get; set; }
 
     public Restaurante? Restaurante { get; set; }
+
+    public List<ProductoCategoria>? ProductoCategoria { get; set; }
     
     public List<DetallePedido>? DetallePedidos { get; set; }
+    
+    
 
 
     public static Producto Create(
@@ -65,12 +70,12 @@ public sealed class Producto : Entity<ProductoId>
         string nombre,
         string descripcion,
         double precio,
-        string imagen_url
-        //bool activo
+        string imagenUrl
+    //bool activo
     )
     {
 
-        var restaurante = new Producto(id, restauranteId, categoriaId, nombre, descripcion, precio, imagen_url);
+        var restaurante = new Producto(id, restauranteId, categoriaId, nombre, descripcion, precio, imagenUrl);
 
         return restaurante;
     }
@@ -78,7 +83,7 @@ public sealed class Producto : Entity<ProductoId>
     public Result Update(
 
 
-        RestauranteId restauranteId,
+        
         ParametroId categoriaId,
         string nombre,
         string descripcion,
@@ -87,12 +92,12 @@ public sealed class Producto : Entity<ProductoId>
 
     )
     {
-        RestauranteId = restauranteId;
+    
         CategoriaId = categoriaId;
         Nombre = nombre.Length > 0 ? nombre : Nombre;
         Descripcion = descripcion.Length > 0 ? descripcion : Descripcion;
         Precio = precio > 0 ? precio : Precio;
-        Imagen_Url = imagen_url.Length > 0 ? imagen_url : Imagen_Url;
+        ImagenUrl = imagen_url.Length > 0 ? imagen_url : ImagenUrl;
 
 
         return Result.Success();

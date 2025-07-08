@@ -20,6 +20,7 @@ using Delivery.Domain.Repartidores;
 using Delivery.Domain.Restaurantes;
 using Delivery.Domain.UsuarioRoles;
 using Delivery.Domain.Roles;
+using Delivery.Domain.ProductoCategorias;
 
 namespace Delivery.Infrastructure;
 
@@ -74,7 +75,14 @@ public static class DependencyInjection
         services.AddScoped<IRestauranteRepository, RestauranteRepository>();
         services.AddScoped<IUsuarioRolRepository, UsuarioRolRepository>();
         services.AddScoped<IRolRepository, RolRepository>();
+        services.AddScoped<IProductoCategoriaRepository, ProductoCategoriaRepository>();
+
+
+        
         services.AddScoped<IPaginationRestauranteRepository, RestauranteRepository>();
+        services.AddScoped<IPaginationProductoRepository, ProductoRepository>();
+
+
 
 
     

@@ -48,7 +48,7 @@ internal sealed class GetByPaginationRestauranteQueryHandler : IQueryHandler<Get
             var resultPagination = await _paginationRestauranteRepository.GetPaginationAsync(
 
                 predicateB,
-                null,
+                null!,
                 request.PageNumber,
                 request.PageSize,
                 request.OrderBy!,
@@ -71,10 +71,10 @@ internal sealed class GetByPaginationRestauranteQueryHandler : IQueryHandler<Get
 
         catch (Exception ex)
         {
-            //Console.WriteLine(ex.ToString());
-            //throw;
+            Console.WriteLine(ex.ToString());
+            throw;
 
-            return Result.Failure<PagedResults<RestauranteDto>?>(RestauranteErrors.PaginationFailed(ex.Message));
+            
 
             
         }

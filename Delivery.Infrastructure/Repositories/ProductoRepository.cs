@@ -1,12 +1,13 @@
 
 
+using Delivery.Application.Paginations;
 using Delivery.Domain.Productos;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace Delivery.Infrastructure.Repositories;
 
-internal sealed class ProductoRepository : Repository<Producto, ProductoId>, IProductoRepository
+internal sealed class ProductoRepository : Repository<Producto, ProductoId>, IProductoRepository,IPaginationProductoRepository
 {
 
     public ProductoRepository(ApplicationDbContext dbContext) : base(dbContext)
@@ -17,12 +18,13 @@ internal sealed class ProductoRepository : Repository<Producto, ProductoId>, IPr
 
     public async Task<List<Producto>> GetAll(CancellationToken cancellationToken = default)
     {
-        return await DbContext.Set<Producto>().ToListAsync(cancellationToken);
+        return await DbContext.Set<Producto>().Include(p=>p.Restaurante).Include(p=>p.Categoria).ToListAsync(cancellationToken);
     }
 
     public async Task<Producto?> GetByIdProductoAsync(ProductoId id, CancellationToken cancellationToken = default)
     {
-        return await DbContext.Set<Producto>().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+        return await DbContext.Set<Producto>().Include(p => p.Restaurante).Include(p=>p.Categoria)
+        .Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
     }
 
 

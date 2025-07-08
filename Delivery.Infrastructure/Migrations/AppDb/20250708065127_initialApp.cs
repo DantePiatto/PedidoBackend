@@ -95,7 +95,7 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                     Nombre = table.Column<string>(type: "text", nullable: false),
                     Descripcion = table.Column<string>(type: "text", nullable: false),
                     Precio = table.Column<double>(type: "double precision", nullable: false),
-                    Imagen_Url = table.Column<string>(type: "text", nullable: false),
+                    ImagenUrl = table.Column<string>(type: "text", nullable: false),
                     Activo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -182,6 +182,30 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         name: "FK_usuario_roles_usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "usuarios",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "producto_categoria",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductoId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CategoriaId = table.Column<int>(type: "integer", nullable: true),
+                    Activo = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_producto_categoria", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_producto_categoria_parametros_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "parametros",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_producto_categoria_productos_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "productos",
                         principalColumn: "Id");
                 });
 
@@ -495,6 +519,16 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                 column: "RepartidorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_producto_categoria_CategoriaId",
+                table: "producto_categoria",
+                column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_producto_categoria_ProductoId",
+                table: "producto_categoria",
+                column: "ProductoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_productos_CategoriaId",
                 table: "productos",
                 column: "CategoriaId");
@@ -557,10 +591,10 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                 name: "producto_asignados");
 
             migrationBuilder.DropTable(
-                name: "usuario_roles");
+                name: "producto_categoria");
 
             migrationBuilder.DropTable(
-                name: "productos");
+                name: "usuario_roles");
 
             migrationBuilder.DropTable(
                 name: "pedidos");
@@ -569,16 +603,19 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                 name: "repartidores");
 
             migrationBuilder.DropTable(
-                name: "roles");
+                name: "productos");
 
             migrationBuilder.DropTable(
-                name: "restaurantes");
+                name: "roles");
 
             migrationBuilder.DropTable(
                 name: "direcciones");
 
             migrationBuilder.DropTable(
                 name: "parametros");
+
+            migrationBuilder.DropTable(
+                name: "restaurantes");
 
             migrationBuilder.DropTable(
                 name: "usuarios");

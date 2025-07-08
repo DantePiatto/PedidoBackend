@@ -42,6 +42,4 @@ internal sealed class DeleteRestauranteCommandHandler : ICommandHandler<DeleteRe
 
 
 
-
-
 }
