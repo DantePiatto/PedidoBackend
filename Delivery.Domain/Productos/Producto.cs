@@ -66,7 +66,7 @@ public sealed class Producto : Entity<ProductoId>
         string descripcion,
         double precio,
         string imagen_url
-    //bool activo
+        //bool activo
     )
     {
 

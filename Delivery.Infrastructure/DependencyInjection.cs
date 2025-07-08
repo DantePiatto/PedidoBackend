@@ -74,6 +74,9 @@ public static class DependencyInjection
         services.AddScoped<IRestauranteRepository, RestauranteRepository>();
         services.AddScoped<IUsuarioRolRepository, UsuarioRolRepository>();
         services.AddScoped<IRolRepository, RolRepository>();
+        services.AddScoped<IPaginationRestauranteRepository, RestauranteRepository>();
+
+
     
 
 
