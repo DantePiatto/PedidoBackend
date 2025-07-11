@@ -35,6 +35,11 @@ internal sealed class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 
         builder.Property(usuario => usuario.IsDefaultPassword);
 
+
+        builder.Property(usuario => usuario.IsCelularVerificado).IsRequired();
+
+        builder.Property(usuario => usuario.IsEmailVerificado).IsRequired();
+
         builder.Property(user => user.Password)
            .IsRequired()
            .HasMaxLength(2000);

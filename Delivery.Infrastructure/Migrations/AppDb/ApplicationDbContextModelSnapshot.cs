@@ -767,7 +767,13 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<bool>("IsCelularVerificado")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsDefaultPassword")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEmailVerificado")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Nombres")

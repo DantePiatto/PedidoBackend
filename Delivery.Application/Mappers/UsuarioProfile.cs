@@ -17,6 +17,9 @@ namespace Delivery.Application.Mappers
             .ForMember(dest => dest.Celular, opt => opt.MapFrom(src => src.Celular!))
             .ForMember(dest => dest.Sexo, opt => opt.MapFrom(src => src.Sexo!))
             .ForMember(dest => dest.IsDefaultPassword, opt => opt.MapFrom(src => src.IsDefaultPassword!))
+            .ForMember(dest => dest.IsCelularVerificado, opt => opt.MapFrom(src => src.IsCelularVerificado!))
+            .ForMember(dest => dest.IsEmailVerificado, opt => opt.MapFrom(src => src.IsEmailVerificado!))
+
             // .ForMember(dest => dest.Rol, opt => opt.MapFrom(src => src.Rol!))
             // .ForMember(dest => dest.RolId, opt => opt.MapFrom(src => src.RolId!.Value))
             // .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente!))

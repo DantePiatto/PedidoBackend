@@ -78,6 +78,8 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                     Celular = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
                     Sexo = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     IsDefaultPassword = table.Column<bool>(type: "boolean", nullable: false),
+                    IsCelularVerificado = table.Column<bool>(type: "boolean", nullable: false),
+                    IsEmailVerificado = table.Column<bool>(type: "boolean", nullable: false),
                     Activo = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
