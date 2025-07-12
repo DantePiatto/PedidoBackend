@@ -34,7 +34,7 @@ internal sealed class ProductoConfiguration : IEntityTypeConfiguration<Producto>
         builder.Property(producto => producto.Nombre).IsRequired();
         builder.Property(producto => producto.Descripcion).IsRequired();
         builder.Property(producto => producto.Precio).IsRequired();
-        builder.Property(producto => producto.Imagen_Url).IsRequired();
+        builder.Property(producto => producto.ImagenUrl).IsRequired();
 
         builder.Property(producto => producto.Activo)
 		.IsRequired()

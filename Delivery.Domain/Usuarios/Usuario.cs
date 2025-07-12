@@ -22,11 +22,13 @@ public sealed class Usuario : Entity<UsuarioId>
         string apellidos,
         string? dni,
         string? celular,
-        string sexo
+        string sexo,
         // RolId rolId
+        bool isCelularVerificado,
+        bool isEmailVerificado
     ) : base(id)
     {
-        
+
         Correo = correo;
         Password = password;
         IsDefaultPassword = isDefaultPassword;
@@ -36,6 +38,8 @@ public sealed class Usuario : Entity<UsuarioId>
         Celular = celular;
         Sexo = sexo;
         // RolId = rolId;
+        IsCelularVerificado = isCelularVerificado;
+        IsEmailVerificado = isEmailVerificado;
     }
 
     public string? Correo { get; set; }
@@ -46,6 +50,10 @@ public sealed class Usuario : Entity<UsuarioId>
     public string? Celular {get; set;}    
     public string? Sexo { get; private set; }
     public bool IsDefaultPassword { get; set; }
+
+    public bool IsCelularVerificado { get; set; }
+
+    public bool IsEmailVerificado { get; set; }
     
     public List<Direccion>? Direccion { get; set; }
 
@@ -70,11 +78,13 @@ public sealed class Usuario : Entity<UsuarioId>
         string apellidos,
         string? dni,
         string? celular,
-        string sexo
+        string sexo,
+        bool isCelularVerificado,
+        bool isEmailVerificado
     // RolId rolId
     )
     {
-        var usuario = new Usuario(id, correo, password, isDefaultPassword, nombres, apellidos, dni, celular, sexo);
+        var usuario = new Usuario(id, correo, password, isDefaultPassword, nombres, apellidos, dni, celular, sexo,isCelularVerificado,isEmailVerificado);
 
         return usuario;
     }

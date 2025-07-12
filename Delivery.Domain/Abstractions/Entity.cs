@@ -22,6 +22,10 @@ public abstract class Entity<TEntityId> : IEntity
     public Activo? Activo {get; set;}
 
 
+    public void Desactivar() => Activo = new(false);
+     public void Activar() => Activo = new(true);
+
+
     public IReadOnlyList<IDomainEvent> GetDomainEvents()
     {
         return _domainEvents.ToList();

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Delivery.Infrastructure.Migrations.AppDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250707020225_initialApp")]
+    [Migration("20250711004354_initialApp")]
     partial class initialApp
     {
         /// <inheritdoc />
@@ -588,6 +588,29 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                     b.ToTable("pedidos", (string)null);
                 });
 
+            modelBuilder.Entity("Delivery.Domain.ProductoCategorias.ProductoCategoria", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("ProductoId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("producto_categoria", (string)null);
+                });
+
             modelBuilder.Entity("Delivery.Domain.Productos.Producto", b =>
                 {
                     b.Property<Guid>("Id")
@@ -603,7 +626,7 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Imagen_Url")
+                    b.Property<string>("ImagenUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -747,7 +770,13 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<bool>("IsCelularVerificado")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsDefaultPassword")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEmailVerificado")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Nombres")
@@ -904,6 +933,21 @@ namespace Delivery.Infrastructure.Migrations.AppDb
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Delivery.Domain.ProductoCategorias.ProductoCategoria", b =>
+                {
+                    b.HasOne("Delivery.Domain.Parametros.Parametro", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId");
+
+                    b.HasOne("Delivery.Domain.Productos.Producto", "Producto")
+                        .WithMany("ProductoCategoria")
+                        .HasForeignKey("ProductoId");
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Producto");
+                });
+
             modelBuilder.Entity("Delivery.Domain.Productos.Producto", b =>
                 {
                     b.HasOne("Delivery.Domain.Parametros.Parametro", "Categoria")
@@ -970,6 +1014,8 @@ namespace Delivery.Infrastructure.Migrations.AppDb
             modelBuilder.Entity("Delivery.Domain.Productos.Producto", b =>
                 {
                     b.Navigation("DetallePedidos");
+
+                    b.Navigation("ProductoCategoria");
                 });
 
             modelBuilder.Entity("Delivery.Domain.Repartidores.Repartidor", b =>

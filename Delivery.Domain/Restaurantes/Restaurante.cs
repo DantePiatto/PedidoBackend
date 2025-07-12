@@ -1,6 +1,7 @@
 
 using Delivery.Domain.Abstractions;
 using Delivery.Domain.Productos;
+using Delivery.Domain.Shared;
 
 
 namespace Delivery.Domain.Restaurantes;
@@ -12,12 +13,12 @@ public sealed class Restaurante : Entity<RestauranteId>
 
     public Restaurante(
 
-        Restaurante id,
+        RestauranteId id,
         string nombre,
         string descripcion,
         string logoUrl,
         int tiempoEntrega
-    )
+    ) : base(id)
     {
 
         Nombre = nombre;
@@ -40,7 +41,7 @@ public sealed class Restaurante : Entity<RestauranteId>
 
     public static Restaurante Create(
 
-        Restaurante id,
+        RestauranteId id,
         string nombre,
         string descripcion,
         string logoUrl,
@@ -51,6 +52,26 @@ public sealed class Restaurante : Entity<RestauranteId>
         var restaurante = new Restaurante(id, nombre, descripcion, logoUrl, tiempoEntrega);
 
         return restaurante;
+    }
+
+
+    public Result Update(
+
+        string nombre,
+        string descripcion,
+        string logoUrl,
+        int tiempoEntrega,
+        bool activo
+
+    )
+    {
+        Nombre = nombre.Length > 0 ? nombre : Nombre;
+        Descripcion = descripcion.Length > 0 ? descripcion : Descripcion;
+        LogoUrl = logoUrl.Length > 0 ? logoUrl : LogoUrl;
+        TiempoEntrega = tiempoEntrega > 0 ? tiempoEntrega : TiempoEntrega;
+        Activo = new Activo(activo);
+
+        return Result.Success();
     }
 
 

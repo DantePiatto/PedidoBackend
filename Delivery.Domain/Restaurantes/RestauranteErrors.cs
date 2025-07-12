@@ -18,6 +18,11 @@ public static class RestauranteErrors
 
         400, "Restaurante ya existe en la base de datos"
     );
+
+    public static Error PaginationFailed(string detail) =>
+        new(500, $"Error al paginar restaurantes: {detail}");
+
+    
     
 
 
